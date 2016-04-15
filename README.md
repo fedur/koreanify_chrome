@@ -1,0 +1,1 @@
+# koreanify_chrome
