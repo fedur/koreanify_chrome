@@ -29,6 +29,7 @@ chrome.runtime.onMessage.addListener(
 
 				splitWords.push(syllables);
 			}
+
 			var translation = "";
 			for (word of splitWords) {
 				for (syllable of word) {
@@ -45,12 +46,8 @@ chrome.runtime.onMessage.addListener(
 				// New word = whitespace
 				translation += " ";
 			}
-			/*  WORK IN PROGRESS
-			var selection = window.getSelection();
-			range = selection.getRangeAt(0);            
-            range.deleteContents();            
-            range.insertNode(document.createTextNode(translation));  */
 
+			console.log(translation);
 			sendResponse(translation);
 		}
 	}
