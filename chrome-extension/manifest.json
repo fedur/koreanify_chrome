@@ -5,7 +5,7 @@
 	"description": "This enables you to translate a romanized korean sentence into Hangul.",
 	"version": "1.0",
 
-	"omnibox": { "keyword" : "aaron" },
+	"omnibox": { "keyword" : "koreanify" },
 
 	"browser_action": {
 		"default_icon": "icon.png",
