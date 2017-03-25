@@ -34,6 +34,8 @@ chrome.commands.onCommand.addListener(function(command) {
 /* Starting omnibox implementation*/
 
 chrome.omnibox.onInputEntered.addListener(function(text) {
+	chrome.tabs.executeScript( null, {file: 'translateSyllable.js'}, undefined);
+	chrome.tabs.executeScript( null, {file: 'Jamo.js'}, undefined); // Class used by translateSyllable.js
 	console.log(text);
   	chrome.tabs.sendMessage(tabs[0].id, {"command": "translate_selection", "word": text}, function(response) {
 		console.log(response);
