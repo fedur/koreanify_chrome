@@ -1,7 +1,3 @@
-chrome.tabs.executeScript( null, {file: 'translateSyllable.js'}, undefined);
-chrome.tabs.executeScript( null, {file: 'Jamo.js'}, undefined); // Class used by translateSyllable.js
-chrome.tabs.executeScript( null, {file: 'getSelection.js'}, undefined);
-
 chrome.commands.onCommand.addListener(function(command) {
 
 	function copyToClipboard(text) {
@@ -15,6 +11,9 @@ chrome.commands.onCommand.addListener(function(command) {
 		document.body.removeChild(input)
 	}
 	if (command == "translate_text") {
+		chrome.tabs.executeScript( null, {file: 'translateSyllable.js'}, undefined);
+		chrome.tabs.executeScript( null, {file: 'Jamo.js'}, undefined); // Class used by translateSyllable.js
+		chrome.tabs.executeScript( null, {file: 'getSelection.js'}, undefined);
 
 		// Send message to active Tab
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -35,6 +34,7 @@ chrome.commands.onCommand.addListener(function(command) {
 /* Starting omnibox implementation*/
 
 chrome.omnibox.onInputEntered.addListener(function(text) {
+	console.log(text);
   	chrome.tabs.sendMessage(tabs[0].id, {"command": "translate_selection", "word": text}, function(response) {
 		console.log(response);
 		copyToClipboard(response);
