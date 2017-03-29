@@ -22,10 +22,17 @@ chrome.commands.onCommand.addListener(function(command) {
 			chrome.tabs.sendMessage(tabs[0].id, {"command": "get_selection"}, function(selection) {
 
 				chrome.tabs.sendMessage(tabs[0].id, {"command": "translate_selection", "word": selection}, function(translation) {
+					if (translation != null) {
+						copyToClipboard(translation);
+						alert(translation + ' copied to Clipboard!')
+					}
+					
+					else alert('oops');
 
-					chrome.tabs.sendMessage(tabs[0].id, {"command": "replace_selection", "translation": translation}, function(response){
+					// NOT READY 
+					/*chrome.tabs.sendMessage(tabs[0].id, {"command": "replace_selection", "translation": translation}, function(response){
 						//console.log(response);
-					});
+					}); */
 				});
 			});
 		});
