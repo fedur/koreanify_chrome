@@ -18,16 +18,15 @@ chrome.commands.onCommand.addListener(function(command) {
 
 		// Send message to active Tab
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+
 			chrome.tabs.sendMessage(tabs[0].id, {"command": "get_selection"}, function(selection) {
-				console.log(selection);
-				// Send message to active Tab
 
-				chrome.tabs.sendMessage(tabs[0].id, {"command": "translate_selection", "word": selection}, function(response) {
-						console.log(response);
-						copyToClipboard(response);
-						alert(response + ' copied to Clipboard!')
+				chrome.tabs.sendMessage(tabs[0].id, {"command": "translate_selection", "word": selection}, function(translation) {
+
+					chrome.tabs.sendMessage(tabs[0].id, {"command": "replace_selection", "translation": translation}, function(response){
+						//console.log(response);
+					});
 				});
-
 			});
 		});
   	}
